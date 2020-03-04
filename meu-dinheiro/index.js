@@ -145,7 +145,11 @@ app.post('/operacoes/edit/:id', async (req, res) =>{
   if(operacoes.length === 0){
     res.redirect('/operacoes')
   }else{
-    await update(app.db, 'operacoes', req.params.id, req.body)
+    const operacao = {
+      descricao: req.body.descricao,
+      valor: parseFloat(req.body.valor)
+    }
+    await update(app.db, 'operacoes', req.params.id, operacao)
     res.redirect('/operacoes')
   }
 })
